@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Medium style editing -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static  'css/blog.css' %}">
+
+  </head>
+  <body class="loader">
+    <div class="container-fluid">
+      <div class="row jumbotron">
+          <!-- Navbar -->
+            <div class="col-12">
+          <nav class="navbar navbar-expand-lg navbar-light techfont">
+            <div class="collapse navbar-collapse">
+              <ul class="navbar-nav mr-auto">
+
+                <li><a class='nav-link bigbrand' href="{% url 'post_list' %}">My blog</a></li>
+
+                <li><a class='nav-link bigbrand' href ="{% url 'about' %}">About</a></li>
+
+                <li><a class='nav-link bigbrand' href="https://www.github.com">Github</a></li>
+
+                <li><a class='nav-link bigbrand' href="https://www.linkedin.com">LinkedIn</a></li>
+
+              </ul>
+
+              <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li>
+                  <a class='nav-link bigbrand' href="{% url 'post_new' %}">New Post</a>
+                </li>
+                <li>
+                  <a class='nav-link bigbrand' href="{% url 'post_draft_list' %}">Drafts</a>
+                </li>
+                <li>
+                  <a class='nav-link bigbrand' href="{% url 'logout' %}">Log Out</a>
+                </li>
+                <li>
+                    <a class='nav-link bigbrand'>Welcome: {{ user.username }}</a>
+                </li>
+                  {% else %}
+                  <li><a class='nav-link bigbrand' href="{% url 'login' %}"><i class="fa fa-user span-i-size" aria-hidden="true"></i></a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+            </div>
+      </div>
+      <!-- CONTENT BLOCK -->
+      <div class="content row">
+        <div class="col-12">
+          <div class="block_posts">
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

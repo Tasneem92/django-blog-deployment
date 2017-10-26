@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <form class="post-form" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class='save btn btn-default'>Save</button>
+    </form>
+
+    <script>var editors = new MediumEditor('.editable');</script>
+    <!-- .editable class is attached here as a widget -->
+  </div>
+</div>
+{% endblock %}
